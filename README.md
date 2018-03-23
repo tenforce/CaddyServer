@@ -22,6 +22,7 @@ For more information on how to configure caddy see https://caddyserver.com/docs
 
 ## Tags
 * *latest*: The latest stable release
+* *git*: The latest stable release with the git plugin
 
 ## License
 Apache v2
