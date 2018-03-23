@@ -1,19 +1,27 @@
-# CaddyServer Dispatcher
-Advantages of the caddyserver implementation are:
-* Out of the box websocket proxying
-* Easy log format configuration
-* 1 line request-id / tracing configuration
-* Small docker image
+# Caddyserver
+Caddyserver is a high performace, easy to configure webserver written in golang with automatic https configuration through letsencrypt.
 
-Due to licensing issues, caddy server is compiled from source rather than fetching the precompiled binaries.
+This repository contains the Dockerfiles which build the tenforce/caddyserver images.
+Due to the fact that the binaries on https://caddyserver.com are not licensed the same way as the source code, the Dockerfiles will build the binaries from source based on an alpine image.
+
+All the binaries produced by the code in this repository is governed by the same license as the underlying caddyserver source code: Apache v2.
+
+The build currently produces a barebones caddyserver without any plugins.
+As time progresses and our needs change we will most likely add some tags whith different configurations.
 
 ## Usage
+In order to use the image, you need to add the website you need to serve and a Caddyfile in `/config`, either by building a new image or using volumes.
+
+The default config file in the base image binds the server to port 80, but does not include any other instructions.
+
 ```bash
-docker run -p "80:80" registry.gitlab.com/oslo2/sp-dispatcher:latest
+docker run -p "80:80" -p "443:443" -v "Caddyfile:/config/Caddyfile" -v "build/:/www" tenfoce/caddyserver
 ```
 
-## Configuration
-A default config file is located in a volume in /config/Caddyfile, just override it with your own configuration.
+For more information on how to configure caddy see https://caddyserver.com/docs
 
-## TODO
-* [] Add a test suite which validates the proxy rules (golang or nodejs are prime candidates because they allow for easy process forking)
+## Tags
+* *latest*: The latest stable release
+
+## License
+Apache v2
