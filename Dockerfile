@@ -20,4 +20,4 @@ RUN mkdir /config
 COPY Caddyfile /config/Caddyfile
 VOLUME /config
 
-CMD ["/caddy", "-conf", "/config/Caddyfile"]
+CMD ["/caddy", "-conf", "/config/Caddyfile", "--agree=$ACME_AGREE"]
