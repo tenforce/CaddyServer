@@ -12,6 +12,7 @@ WORKDIR /go/src/github.com/mholt/caddy/caddy
 RUN go build
 
 FROM alpine:latest
+ENV ACME_AGREE=false
 
 EXPOSE 80
 EXPOSE 443
